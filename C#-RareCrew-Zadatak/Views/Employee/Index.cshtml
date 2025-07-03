@@ -1,0 +1,15 @@
+﻿@model List<C__RareCrew_Zadatak.ResponseModel.EmployeeResponse>
+
+<h2>Zaposleni</h2>
+<table class="table">
+    <thead><tr><th>Ime</th><th>Ukupno sati</th></tr></thead>
+    <tbody>
+        @foreach (var e in Model)
+        {
+            <tr class="@(e.UkupnoSati < 100 ? "table-danger" : "")">
+                <td>@e.EmployeeName</td>
+                <td>@e.UkupnoSati</td>
+            </tr>
+        }
+    </tbody>
+</table>
