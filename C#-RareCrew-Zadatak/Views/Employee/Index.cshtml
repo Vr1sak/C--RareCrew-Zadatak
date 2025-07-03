@@ -1,5 +1,6 @@
 ﻿@model List<C__RareCrew_Zadatak.ResponseModel.EmployeeResponse>
 
+
 <h2>Zaposleni</h2>
 <table class="table">
     <thead><tr><th>Ime</th><th>Ukupno sati</th></tr></thead>
@@ -13,3 +14,8 @@
         }
     </tbody>
 </table>
+
+
+<div style="display: flex; justify-content: center">
+    <img src="@Url.Action("Chart", "Employee")"/>
+</div>
