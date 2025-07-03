@@ -57,15 +57,16 @@ namespace C__RareCrew_Zadatak.Controllers
                 .GroupBy(e => e.EmployeeName)
                 .Select(g => new {
                     EmployeeName = g.Key,
-                    UkupniSati = g.Sum(x =>
+                    UkupnoSati = g.Sum(x =>
                         (DateTime.Parse(x.EndTimeUtc)
                          - DateTime.Parse(x.StarTimeUtc))
                         .TotalHours)
                 })
-                .OrderByDescending(x => x.UkupniSati)
+                .OrderByDescending(x => x.UkupnoSati)
                 .ToList();
 
-            
+            double ukupnoSati = employeesPrikaz.Sum(x => x.UkupnoSati);
+
             var pie = new Chart
             {
                 Width = 600,
@@ -79,22 +80,33 @@ namespace C__RareCrew_Zadatak.Controllers
             pie.Legends.Add(new Legend("Legend") { Docking = Docking.Right });
 
             pie.Titles.Add("Ukupno sati po zaposlenom");
+
             var series = new Series
             {
                 ChartType = SeriesChartType.Pie,
-                IsValueShownAsLabel = true,
-                Label = "#PERCENT{P2}",
-                LegendText = "#VALX",
+                IsValueShownAsLabel = false,
                 ChartArea = area.Name
             };
+
             pie.Series.Add(series);
 
             foreach (var e in employeesPrikaz)
             {
                 if (string.IsNullOrEmpty(e.EmployeeName))
-                    continue;          
+                    continue;
 
-                series.Points.AddXY(e.EmployeeName, e.UkupniSati);
+                double procenat = Math.Round(e.UkupnoSati / ukupnoSati * 100, 2);
+
+                var pt = new DataPoint
+                {
+                    AxisLabel = e.EmployeeName,
+                    YValues = new[] { e.UkupnoSati }
+                };
+
+                pt.LegendText = e.EmployeeName;
+
+                pt.Label = $"{procenat:F2}%";
+                series.Points.Add(pt);
             }
 
             using var ms = new MemoryStream();
