@@ -78,7 +78,7 @@ namespace C__RareCrew_Zadatak.Controllers
 
             pie.Legends.Add(new Legend("Legend") { Docking = Docking.Right });
 
-            pie.Titles.Add("Total time worked");
+            pie.Titles.Add("Ukupno sati po zaposlenom");
             var series = new Series
             {
                 ChartType = SeriesChartType.Pie,
