@@ -42,7 +42,6 @@ namespace C__RareCrew_Zadatak.Controllers
            .OrderByDescending(x => x.UkupnoSati)
            .ToList();
 
-
             return View(employeesPrikaz);
         }
 
@@ -115,6 +114,5 @@ namespace C__RareCrew_Zadatak.Controllers
         }
 
     }
-  
 
- }
+}

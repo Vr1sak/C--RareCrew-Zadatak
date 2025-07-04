@@ -7,7 +7,7 @@
     <tbody>
         @foreach (var e in Model)
         {
-            <tr class="@(e.UkupnoSati < 100 ? "table-danger" : "")">
+            <tr class="@(e.UkupnoSati < 100 ? "boja" : "")">
                 <td>@e.EmployeeName</td>
                 <td>@e.UkupnoSati</td>
             </tr>
